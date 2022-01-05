@@ -11,9 +11,7 @@ let pwNumbers = "0123456789";
 // let spChars = ["!", "#", "%", "&", "(", ")", "*", "+", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "]", "^", "_", "~"];
 let spChars = "!#%&()*+-./:;<=>?@[]^_~";
 
-
-// generatePassword
-// return a final password as a string
+//this function will generate the password
 function generatePassword() {
   let pwOptions = "";
 let randomlyGeneratedPassword = [];
@@ -35,11 +33,11 @@ let randomlyGeneratedPassword = [];
   if (askSc === true) {
     randomlyGeneratedPassword.push(spChars[getRandomNumber(spChars.length)]);
     pwLength --
-    console.log("this is my password", randomlyGeneratedPassword)
+    
 
      pwOptions = pwOptions.concat(spChars);
   }
-    //randomly grab character
+    //lines 38randomly grab character
   let askLc = confirm("Do you want lowercase letters?");
   
   if (askLc === true) { 
