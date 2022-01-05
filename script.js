@@ -4,18 +4,19 @@ console.log(document);
 // 1b. create array of letters
 // let lcLetters = ["a" "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 let lcLetters = "abcdefghijklmnopqrtsuvwxyz";
-//do above style for all
 // let ucLetters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 let ucLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 // let pwNumbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 let pwNumbers = "0123456789";
 // let spChars = ["!", "#", "%", "&", "(", ")", "*", "+", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "]", "^", "_", "~"];
 let spChars = "!#%&()*+-./:;<=>?@[]^_~";
-let potentialOptions = "";
-//let pwOptions = [lcLetters,ucLetters,pwNumbers,spChars]
+
+
 // generatePassword
 // return a final password as a string
 function generatePassword() {
+  let pwOptions = "";
+let randomlyGeneratedPassword = [];
   // 1. assign a variable to the length of the password
   let pwLength = prompt("How long would you like your password to be? (minimum 8 characters, max 128)");
   console.log(pwLength);
@@ -27,32 +28,59 @@ function generatePassword() {
     alert("Not a valid length. Please enter a number between 8 and 128.");
     return generatePassword();
   }
-}
+
 //asks user what characters they want 
-  let askSc = prompt("Do you want special characters?");
-  if (askSc) {
-    const potentialOptions = 'spChars';
+  let askSc = confirm("Do you want special characters?");
+  
+  if (askSc === true) {
+    randomlyGeneratedPassword.push(spChars[getRandomNumber(spChars.length)]);
+    pwLength --
+    console.log("this is my password", randomlyGeneratedPassword)
+
+     pwOptions = pwOptions.concat(spChars);
   }
-  let askLc = prompt("Do you want lowercase letters?");
-  if (askLc) {
-   
-    const potentialOptions = 'spChars' + 'lcLetters';
+    //randomly grab character
+  let askLc = confirm("Do you want lowercase letters?");
+  
+  if (askLc === true) { 
+    randomlyGeneratedPassword.push(lcLetters[getRandomNumber(lcLetters.length)]);
+    pwLength --
+   pwOptions = pwOptions.concat(lcLetters);   
   }
-  let askUc = prompt("Do you want uppercase letters?");
-  if (askUc) {
-    const potentialOptions = 'spChars' + 'lcLetters' + 'ucLetters';
+ 
+  let askUc = confirm("Do you want uppercase letters?");
+
+  if (askUc === true) {
+    randomlyGeneratedPassword.push(ucLetters[getRandomNumber(ucLetters.length)]);
+    pwLength --
+
+    pwOptions = pwOptions.concat(ucLetters); 
   }
-  let askNum = prompt("Do you want to add numbers?");
-  if (askNum) {
-    const potentialOptions = 'spChars' + 'lcLetters' + 'ucLetters' + 'pwNumbers';
+ 
+  let askNum = confirm("Do you want to add numbers?");
+ 
+  if (askNum === true) {
+    randomlyGeneratedPassword.push(pwNumbers[getRandomNumber(pwNumbers.length)]);
+    pwLength --
+
+    console.log(randomlyGeneratedPassword)
+    pwOptions = pwOptions.concat(pwNumbers);
   }
 
-  let password = [];
+if (spChars === false && lcLetters === false && ucLetters === false && pwNumbers === false) {
+  "Password must contain at least one character type.";
+  generatePassword();
+}
+ for (let i = 0; i < pwLength; i++) {
+  randomlyGeneratedPassword.push(pwOptions[getRandomNumber(pwOptions.length)]);
+
+ }
+
+
+  
   // 1a. create a password with that length
   // 1c. loop through array of letters
-  for (let i = 0; i < pwLength; i++) {
-    // 1d. push each letter array into password array
-    password.push(potentialOptions[getRandomNumber(potentialOptions.length)]);
+  return randomlyGeneratedPassword.join("")
   }
 
   // 1e. create a random 10 letter password
@@ -60,10 +88,10 @@ function generatePassword() {
   // 2 ask user for length
 
   // 1e. convert password array back to string
-  return randomizePassword(password.join(""), pwLength);
+  //return randomizePassword(password.join(""), pwLength);
 
-  //return password.join("").substring(0, pwLength);
-}
+  
+
 
 // Write password to the #password input
 function writePassword() {
