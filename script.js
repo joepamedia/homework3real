@@ -11,11 +11,11 @@ let pwNumbers = "0123456789";
 // let spChars = ["!", "#", "%", "&", "(", ")", "*", "+", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "]", "^", "_", "~"];
 let spChars = "!#%&()*+-./:;<=>?@[]^_~";
 
-//this function will generate the password
+// this function will generate the password
 function generatePassword() {
   let pwOptions = "";
 let randomlyGeneratedPassword = [];
-  // 1. assign a variable to the length of the password
+  // assign a variable to the length of the password
   let pwLength = prompt("How long would you like your password to be? (minimum 8 characters, max 128)");
   console.log(pwLength);
   //conditional statement
@@ -33,11 +33,11 @@ let randomlyGeneratedPassword = [];
   if (askSc === true) {
     randomlyGeneratedPassword.push(spChars[getRandomNumber(spChars.length)]);
     pwLength --
-    
+    //line 34,44,52,61 randomly grabs characters if user selects "ok"
 
-     pwOptions = pwOptions.concat(spChars);
+     pwOptions = pwOptions.concat(spChars); /*adds selection to empty array*/
   }
-    //lines 38randomly grab character
+    
   let askLc = confirm("Do you want lowercase letters?");
   
   if (askLc === true) { 
@@ -65,6 +65,7 @@ let randomlyGeneratedPassword = [];
     pwOptions = pwOptions.concat(pwNumbers);
   }
 
+  //this if statement executes if the user chooses "cancel" for each selection of characters
 if (spChars === false && lcLetters === false && ucLetters === false && pwNumbers === false) {
   "Password must contain at least one character type.";
   generatePassword();
@@ -76,20 +77,12 @@ if (spChars === false && lcLetters === false && ucLetters === false && pwNumbers
 
 
   
-  // 1a. create a password with that length
+ 
   // 1c. loop through array of letters
   return randomlyGeneratedPassword.join("")
   }
 
-  // 1e. create a random 10 letter password
-
-  // 2 ask user for length
-
-  // 1e. convert password array back to string
-  //return randomizePassword(password.join(""), pwLength);
-
   
-
 
 // Write password to the #password input
 function writePassword() {
@@ -108,12 +101,12 @@ function randomizePassword(pwOptions, length) {
   for (let i = 0; i < length; i++) {
     result += pwOptions.charAt(Math.floor(Math.random() * charactersLength));
   }
-  // TODO: this does not gurantee password reqs. will be met
+  
   return result;
 }
 
 let i = Math.floor(Math.random() * lcLetters.length);
 let computerChoice = lcLetters[i];
 // Add event listener to generate button
-// kicks off the generator
+// kicks off the generator. starts with "writePassword" function
 generateBtn.addEventListener("click", writePassword);
