@@ -13,13 +13,13 @@ let spChars = "!#%&()*+-./:;<=>?@[]^_~";
 
 // this function will generate the password
 function generatePassword() {
-  let pwOptions = "";
+  let pwOptions = ""; /* declaring variables; holds information */
 let randomlyGeneratedPassword = [];
   // assign a variable to the length of the password
   let pwLength = prompt("How long would you like your password to be? (minimum 8 characters, max 128)");
   console.log(pwLength);
   //conditional statement
-  //check if user input is a number
+  //check if user input is a valid number
   if (parseInt(pwLength) && parseInt(pwLength) >= 8 && parseInt(pwLength) <= 128) {
     console.log("Valid length");
   } else {
@@ -32,12 +32,12 @@ let randomlyGeneratedPassword = [];
   
   if (askSc === true) {
     randomlyGeneratedPassword.push(spChars[getRandomNumber(spChars.length)]);
-    pwLength --
+    pwLength -- /*added 1 character to randomlyGeneratedPawssowrd array, this will decrement (--) our for loop that will run. */
     //line 34,44,52,61 randomly grabs characters if user selects "ok"
 
      pwOptions = pwOptions.concat(spChars); /*adds selection to empty array*/
   }
-    
+
   let askLc = confirm("Do you want lowercase letters?");
   
   if (askLc === true) { 
@@ -78,7 +78,7 @@ if (spChars === false && lcLetters === false && ucLetters === false && pwNumbers
 
   
  
-  // 1c. loop through array of letters
+// returns the password 
   return randomlyGeneratedPassword.join("")
   }
 
@@ -91,10 +91,14 @@ function writePassword() {
   passwordText.value = password;
 }
 
+
+//generates random number
 function getRandomNumber(max) {
   return Math.floor(Math.random() * max);
 }
 
+//randomizes password for pwOptions and takes the length.
+//then it runs through the loop
 function randomizePassword(pwOptions, length) {
   let result = "";
   let charactersLength = pwOptions.length;
